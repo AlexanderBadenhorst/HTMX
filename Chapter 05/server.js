@@ -1,8 +1,8 @@
-import express from 'express';
+import express from "express";
 
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -12,7 +12,7 @@ app.post("/email", (req, res) => {
   const submittedEmail = req.body.email;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  if(emailRegex.test(submittedEmail)) {
+  if (emailRegex.test(submittedEmail)) {
     return res.send(`
         <div class="mb-3" hx-target="this" hx-swap="outerHTML">
 <label class="form-label">Email address</label>
@@ -28,7 +28,7 @@ app.post("/email", (req, res) => {
     </div>
 </div>
 `);
-  }else {
+  } else {
     return res.send(`
         <div class="mb-3" hx-target="this" hx-swap="outerHTML">
 <label class="form-label">Email address</label>
@@ -45,7 +45,6 @@ app.post("/email", (req, res) => {
 </div>
 `);
   }
-
 });
 
 app.listen(3000, () => {
