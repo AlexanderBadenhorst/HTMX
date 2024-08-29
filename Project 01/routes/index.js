@@ -3,6 +3,7 @@ const router = express.Router();
 const bookService = require('./bookService');
 
 router.get('/', (req, res) => {
+  console.log('Root route executed');
   bookService.getBooks((err, books) => {
     if (err) {
       res.status(500).send({ message: 'Error fetching books' });
@@ -99,3 +100,6 @@ router.get('/books/author/:author', (req, res) => {
     });
   }
 });
+
+// Export the router middleware function
+module.exports = router;
