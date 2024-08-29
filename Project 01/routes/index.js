@@ -15,6 +15,9 @@ const books = [
   { id: 10, title: 'Constitution Of The Republic Of South Africa, 1996', author: 'JUTA Law', ISBN: '978-1-48513-398-8' },
 ];
 
+router.use(express.json());
+
+
 router.get('/books', (req, res) => {
   console.log('books:', books);
   res.render('index', { action: '', books, book: {} });
@@ -42,9 +45,25 @@ router.get('/books/:id/edit', (req, res) => {
   }
 });
 
+// GET /books/:id
+router.get('/books/:id(\\d+)', (req, res) => {
+  const { id } = req.params;
+  const book = books.find((c) => c.id === Number(id));
+
+  if (book) {
+    res.render('book', { book });
+  } else {
+    res.status(404).send('Book not found');
+  }
+});
+
 // POST /books
 router.post('/books', (req, res) => {
   console.log('New book added:', req.body);
+  if (!req.body) {
+    console.error('No request body found!');
+    return res.status(400).send('Bad request');
+  }
   const newBook = {
     id: books.length + 1,
     title: req.body.title,
