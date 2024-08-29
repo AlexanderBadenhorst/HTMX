@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='UTF-8')
-    title Contact Manager
+    title Book Manager
 
     link(rel='preconnect', href='https://fonts.googleapis.com')
     link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin)
@@ -11,8 +11,8 @@ html
     link(rel='stylesheet', href='/styles.css')
   body
     header
-      a(href='/contacts')
-        h1 Contact Manager
+      a(href='/books')
+        h1 Book Manager
 
     section#sidebar
       include sidebar.pug
@@ -20,12 +20,12 @@ html
     main#content
       case action
         when 'show'
-          include contact.pug
+          include book.pug
         when 'new'
           include form.pug
         when 'edit'
           include form.pug
         default
-          p Select a contact
+          p Select a book
 
     script(src='https://unpkg.com/htmx.org@1.9.10')

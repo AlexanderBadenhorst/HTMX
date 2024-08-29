@@ -1,22 +1,22 @@
-- isEditing = () => !(Object.keys(contact).length === 0);
+- isEditing = () => !(Object.keys(book).length === 0);
 
-h2=isEditing() ? "Edit Contact" : "New Contact"
+h2=isEditing() ? "Edit Book" : "New Book"
 
 form(
-  action=isEditing() ? `/update/${contact.id}?_method=PUT` : '/contacts',
+  action=isEditing() ? `/update/${book.id}?_method=PUT` : '/books',
   method='POST',
 
-  hx-post=isEditing() ? false : '/contacts',
-  hx-put=isEditing() ? `/update/${contact.id}` : false,
+  hx-post=isEditing() ? false : '/books',
+  hx-put=isEditing() ? `/update/${book.id}` : false,
   hx-target='#sidebar',
-  hx-push-url=isEditing() ? `/contacts/${contact.id}` : false
+  hx-push-url=isEditing() ? `/books/${book.id}` : false
   hx-on::after-request='if(event.detail.successful) this.reset()',
 )
-  label(for='name') Name:
-  input#name(type='text', name='name', required, value=contact.name)
+  label(for='title') Title:
+  input#title(type='text', title='title', required, value=book.title)
 
-  label(for='email') Email:
-  input#email(type='email', name='email', required, value=contact.email)
+  label(for='author') Author:
+  input#author(type='author', title='author', required, value=book.author)
 
   div.actions
     button(type='submit') Submit

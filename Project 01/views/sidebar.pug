@@ -1,17 +1,17 @@
-ul.contact-list
-  each contact in contacts
+ul.book-list
+  each book in books
     li
       a(
-        href=`/contacts/${contact.id}`,
-        hx-get=`/contacts/${contact.id}`,
+        href=`/books/${book.id}`,
+        hx-get=`/books/${book.id}`,
         hx-target='#content'
         hx-push-url='true',
-      )= contact.name
+      )= book.title
 
 div.actions
   a(
-    href='/contacts/new',
-    hx-get='/contacts/new',
+    href='/books/new',
+    hx-get='/books/new',
     hx-target='#content',
     hx-push-url='true'
-  ) New Contact
+  ) New Book

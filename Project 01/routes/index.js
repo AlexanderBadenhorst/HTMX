@@ -2,108 +2,108 @@ const express = require('express');
 
 const router = express.Router();
 
-const contacts = [
-  { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { id: 3, name: 'Emily Johnson', email: 'emily.johnson@example.com' },
-  { id: 4, name: 'Aarav Patel', email: 'aarav.patel@example.com' },
-  { id: 5, name: 'Liu Wei', email: 'liu.wei@example.com' },
-  { id: 6, name: 'Fatima Zahra', email: 'fatima.zahra@example.com' },
-  { id: 7, name: 'Carlos Hernández', email: 'carlos.hernandez@example.com' },
-  { id: 8, name: 'Olivia Kim', email: 'olivia.kim@example.com' },
-  { id: 9, name: 'Kwame Nkrumah', email: 'kwame.nkrumah@example.com' },
-  { id: 10, name: 'Chen Yu', email: 'chen.yu@example.com' },
+const books = [
+  { id: 1, title: 'Science in the Soul', author: 'Richard Dawkins', ISBN: '978-0-593-07751-1' },
+  { id: 2, title: "Leo's guide to Not Becoming A Statistic", author: 'Leo Prinsloo', ISBN: '978-1-920707-29-3' },
+  { id: 3, title: 'The Elite', author: 'Barbara Cole', ISBN: '0-620-08517-7' },
+  { id: 4, title: 'War and Peace', author: 'Leo Tolstoy', ISBN: '1-85326-062-2'  },
+  { id: 5, title: 'A Feast For Crows', author: 'George R.R. Martin', ISBN: '978-0-00-744786-2'  },
+  { id: 6, title: 'Recce', author: 'Koos Stadler', ISBN: '978-0-624-06944-7'  },
+  { id: 7, title: 'Beyond Good and Evil', author: 'Friedrich Nietzsche', ISBN: '978-0-141-39583-8'  },
+  { id: 8, title: 'Dream Psychology', author: 'Sigmund Freud', ISBN: '978-1-099-63579-3'  },
+  { id: 9, title: '12 Rules For Life', author: 'Jordan B. Peterson', ISBN: '978-0-141-98851-1' },
+  { id: 10, title: 'Constitution Of The Republic Of South Africa, 1996', author: 'JUTA Law', ISBN: '978-1-48513-398-8' },
 ];
 
-router.get('/contacts', (req, res) => {
-  console.log('Contacts:', contacts);
-  res.render('index', { action: '', contacts, contact: {} });
+router.get('/books', (req, res) => {
+  console.log('books:', books);
+  res.render('index', { action: '', books, book: {} });
 });
 
-// GET /contacts
-router.get('/contacts', (req, res) => {
-  res.render('index', { action: '', contacts, contact: {} });
+// GET /books
+router.get('/books', (req, res) => {
+  res.render('index', { action: '', books, book: {} });
 });
 
-// GET /contacts/new
-router.get('/contacts/new', (req, res) => {
+// GET /books/new
+router.get('/books/new', (req, res) => {
   if (req.headers['hx-request']) {
-    res.render('form', { contact: {} });
+    res.render('form', { book: {} });
   } else {
-    res.render('index', { action: 'new', contacts, contact: {} });
+    res.render('index', { action: 'new', books, book: {} });
   }
 });
 
-// GET /contacts/1
-router.get('/contacts/:id', (req, res) => {
+// GET /books/1
+router.get('/books/:id', (req, res) => {
   const { id } = req.params;
-  const contact = contacts.find((c) => c.id === Number(id));
+  const book = books.find((c) => c.id === Number(id));
 
   if (req.headers['hx-request']) {
-    res.render('contact', { contact });
+    res.render('book', { book });
   } else {
-    res.render('index', { action: 'show', contacts, contact });
+    res.render('index', { action: 'show', books, book });
   }
 });
 
-// GET /contacts/1/edit
-router.get('/contacts/:id/edit', (req, res) => {
+// GET /books/1/edit
+router.get('/books/:id/edit', (req, res) => {
   const { id } = req.params;
-  const contact = contacts.find((c) => c.id === Number(id));
+  const book = books.find((c) => c.id === Number(id));
 
   if (req.headers['hx-request']) {
-    res.render('form', { contact });
+    res.render('form', { book });
   } else {
-    res.render('index', { action: 'edit', contacts, contact });
+    res.render('index', { action: 'edit', books, book });
   }
 });
 
-// POST /contacts
-router.post('/contacts', (req, res) => {
-  const newContact = {
-    id: contacts.length + 1,
+// POST /books
+router.post('/books', (req, res) => {
+  const newBook = {
+    id: books.length + 1,
     name: req.body.name,
     email: req.body.email,
   };
 
-  contacts.push(newContact);
+  books.push(newBook);
 
   if (req.headers['hx-request']) {
-    res.render('sidebar', { contacts }, (err, sidebarHtml) => {
+    res.render('sidebar', { books }, (err, sidebarHtml) => {
       const html = `
         <main id="content" hx-swap-oob="afterbegin">
-          <p class="flash">Contact was successfully added!</p>
+          <p class="flash">Book was successfully added!</p>
         </main>
         ${sidebarHtml}
       `;
       res.send(html);
     });
   } else {
-    res.render('index', { action: 'new', contacts, contact: {} });
+    res.render('index', { action: 'new', books, book: {} });
   }
 });
 
-// PUT /contacts/1
+// PUT /books/1
 router.put('/update/:id', (req, res) => {
   const { id } = req.params;
 
-  const newContact = {
+  const newBook = {
     id: Number(id),
     name: req.body.name,
     email: req.body.email,
   };
 
-  const index = contacts.findIndex((c) => c.id === Number(id));
+  const index = books.findIndex((c) => c.id === Number(id));
 
-  if (index !== -1) contacts[index] = newContact;
+  if (index !== -1) books[index] = newBook;
 
   if (req.headers['hx-request']) {
-    res.render('sidebar', { contacts }, (err, sidebarHtml) => {
-      res.render('contact', { contact: contacts[index] }, (err, contactHTML) => {
+    res.render('sidebar', { books }, (err, sidebarHtml) => {
+      res.render('book', { book: books[index] }, (err, bookHTML) => {
         const html = `
           ${sidebarHtml}
           <main id="content" hx-swap-oob="true">
-            <p class="flash">Contact was successfully updated!</p>
+            <p class="flash">Book was successfully updated!</p>
             ${contactHTML}
           </main>
         `;
@@ -112,28 +112,28 @@ router.put('/update/:id', (req, res) => {
       });
     });
   } else {
-    res.redirect(`/contacts/${index + 1}`);
+    res.redirect(`/books/${index + 1}`);
   }
 });
 
-// DELETE /contacts/1
+// DELETE /books/1
 router.delete('/delete/:id', (req, res) => {
   const { id } = req.params;
-  const index = contacts.findIndex((c) => c.id === Number(id));
+  const index = books.findIndex((c) => c.id === Number(id));
 
-  if (index !== -1) contacts.splice(index, 1);
+  if (index !== -1) books.splice(index, 1);
   if (req.headers['hx-request']) {
-    res.render('sidebar', { contacts }, (err, sidebarHtml) => {
+    res.render('sidebar', { books }, (err, sidebarHtml) => {
       const html = `
         <main id="content" hx-swap-oob="true">
-          <p class="flash">Contact was successfully deleted!</p>
+          <p class="flash">Book was successfully deleted!</p>
         </main>
         ${sidebarHtml}
       `;
       res.send(html);
     });
   } else {
-    res.redirect('/contacts');
+    res.redirect('/Books');
   }
 });
 

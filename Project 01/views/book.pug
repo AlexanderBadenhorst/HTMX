@@ -1,0 +1,21 @@
+h2 #{book.title}
+
+p #[strong Title:] #{book.title}
+p #[strong Author:] #{book.author}
+
+div.actions
+  form(method='POST', action=`/delete/${book.id}?_method=DELETE`)
+    button(
+      type='submit',
+      hx-delete=`/delete/${book.id}`,
+      hx-target='#sidebar',
+      hx-push-url='/books'
+      class='link'
+    ) Delete Book
+
+  a(
+    href=`/books/${book.id}/edit`,
+    hx-get=`/book/${book.id}/edit`,
+    hx-push-url='true',
+    hx-target='#content'
+  ) Edit book
