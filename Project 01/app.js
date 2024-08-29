@@ -11,7 +11,7 @@ app.set('view engine', 'pug');
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use('/', routes);
+app.use('/books', routes); // modified line
 
 const server = app.listen(3000, () => {
   console.log(`Express is running on port ${server.address().port}`);
