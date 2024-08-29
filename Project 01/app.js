@@ -10,6 +10,7 @@ app.set('view engine', 'pug');
 
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 app.use('/', routes);
 

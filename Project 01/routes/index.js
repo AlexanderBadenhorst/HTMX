@@ -20,11 +20,6 @@ router.get('/books', (req, res) => {
   res.render('index', { action: '', books, book: {} });
 });
 
-// GET /books
-router.get('/books', (req, res) => {
-  res.render('index', { action: '', books, book: {} });
-});
-
 // GET /books/new
 router.get('/books/new', (req, res) => {
   if (req.headers['hx-request']) {
@@ -34,17 +29,6 @@ router.get('/books/new', (req, res) => {
   }
 });
 
-// GET /books/1
-router.get('/books/:id', (req, res) => {
-  const { id } = req.params;
-  const book = books.find((c) => c.id === Number(id));
-
-  if (req.headers['hx-request']) {
-    res.render('book', { book });
-  } else {
-    res.render('index', { action: 'show', books, book });
-  }
-});
 
 // GET /books/1/edit
 router.get('/books/:id/edit', (req, res) => {
@@ -60,10 +44,12 @@ router.get('/books/:id/edit', (req, res) => {
 
 // POST /books
 router.post('/books', (req, res) => {
+  console.log('New book added:', req.body);
   const newBook = {
     id: books.length + 1,
     title: req.body.title,
     author: req.body.author,
+    ISBN: req.body.ISBN,
   };
 
   books.push(newBook);
@@ -91,6 +77,7 @@ router.put('/update/:id', (req, res) => {
     id: Number(id),
     title: req.body.title,
     author: req.body.author,
+    ISBN: req.body.ISBN,
   };
 
   const index = books.findIndex((c) => c.id === Number(id));

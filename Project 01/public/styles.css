@@ -189,3 +189,14 @@ p + .actions {
   border-radius: 3px;
   box-shadow: 0 2px 4px var(--color-shadow);
 }
+
+input[type="isbn"] {
+  width: 400px;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+
+  font-size: 1.2rem;
+
+  background-color: var(--color-background);
+  border: 1px solid var(--color-light-gray);
+}
