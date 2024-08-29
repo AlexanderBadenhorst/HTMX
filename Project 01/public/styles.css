@@ -1,14 +1,14 @@
 :root {
-  --color-primary: #3273dc;
-  --color-secondary: #23d160;
-  --color-background: #f9f9f9;
-  --color-text: #363636;
+  --color-primary: #2c3e50; /* Deep blue */
+  --color-secondary: #8e44ad; /* Rich purple */
+  --color-background: #333; /* Dark grey */
+  --color-text: #c9d4f7; /* Light gray */
   --color-white: #fff;
-  --color-light-gray: #ccc;
-  --color-flash: #48c78e;
+  --color-light-gray: #444;
+  --color-flash: #3498db; /* Bright blue */
   --color-flash-text: #f9f9f9;
-  --color-link-hover: #255aa7;
-  --color-shadow: rgba(0 0 0 / 20%);
+  --color-link-hover: #4e5153; /* Darker gray */
+  --color-shadow: rgba(0, 0, 0, 0.5);
 }
 
 *,
@@ -33,11 +33,11 @@ body {
 
   height: 100vh;
 
-  font-family: Roboto, sans-serif;
-  font-size: 62.5%;
-  font-weight: 400;
-  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--color-text);
+  background-color: var(--color-background);
 }
 
 header {
@@ -52,13 +52,13 @@ header {
 
 #sidebar {
   grid-area: sidebar;
-  padding: 25px;
+  padding: 2rem;
   background-color: var(--color-background);
 }
 
 #content {
   grid-area: content;
-  padding: 25px;
+  padding: 2rem;
 }
 
 header a {
@@ -72,25 +72,25 @@ header a {
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 300;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 h2 {
+  font-size: 2rem;
+  font-weight: 500;
   margin-bottom: 1rem;
-  font-size: 2.3rem;
-  line-height: 1;
   color: var(--color-primary);
 }
 
 ul {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   list-style: none;
+  margin-bottom: 2rem;
 }
 
 ul li::before {
   content: '•';
-
   display: inline-block;
 
   width: 1rem;
@@ -126,7 +126,7 @@ ul a:hover {
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 label {
@@ -139,9 +139,9 @@ input[type="text"],
 input[type="author"] {
   width: 400px;
   margin-bottom: 1rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
 
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   background-color: var(--color-background);
   border: 1px solid var(--color-light-gray);
@@ -156,9 +156,9 @@ input[type="author"]:focus {
 button[type="submit"]:not(.link) {
   cursor: pointer;
 
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.2rem;
 
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--color-white);
 
   background-color: var(--color-primary);
@@ -174,7 +174,7 @@ button[type="submit"]:hover {
 
 ul + .actions,
 p + .actions {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .flash {
@@ -195,8 +195,16 @@ input[type="isbn"] {
   margin-bottom: 1rem;
   padding: 0.3rem;
 
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   background-color: var(--color-background);
-  border: 1px solid var(--color-light-gray);
+  border:  1px solid var(--color-light-gray);
+}
+
+h1, h2 {
+  color: #aaa; /* Lightened text color for headings */
+}
+
+.actions a, .actions button {
+  color: #ccc; /* Lightened text color for buttons */
 }

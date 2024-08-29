@@ -1,11 +1,11 @@
 - isEditing = () => !(Object.keys(book).length === 0);
 
-h2=isEditing() ? "Edit Book" : "New Book"
+h2= isEditing() ? "Edit Book" : "New Book"
 
 form(
   action=isEditing() ? `/update/${book.id}?_method=PUT` : '/books',
   method='POST',
-
+  enctype='application/x-www-form-urlencoded',
   hx-post=isEditing() ? false : '/books',
   hx-put=isEditing() ? `/update/${book.id}` : false,
   hx-target='#sidebar',
@@ -13,13 +13,13 @@ form(
   hx-on::after-request='if(event.detail.successful) this.reset()',
 )
   label(for='title') Title:
-  input#title(type='text', title='title', required, value=book.title)
+    input#title(type='text', name='title', required, value=book.title)
 
   label(for='author') Author:
-  input#author(type='author', title='author', required, value=book.author)
+    input#author(type='text', name='author', required, value=book.author)
 
   label(for='ISBN') ISBN:
-  input#ISBN(type='ISBN', title='ISBN', required, value=book.ISBN)
+    input#ISBN(type='text', name='ISBN', required, value=book.ISBN)
 
   div.actions
     button(type='submit') Submit

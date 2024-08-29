@@ -15,7 +15,8 @@ const books = [
   { id: 10, title: 'Constitution Of The Republic Of South Africa, 1996', author: 'JUTA Law', ISBN: '978-1-48513-398-8' },
 ];
 
-router.use(express.json());
+//router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
 
 router.get('/books', (req, res) => {
