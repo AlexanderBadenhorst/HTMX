@@ -62,8 +62,8 @@ router.get('/books/:id/edit', (req, res) => {
 router.post('/books', (req, res) => {
   const newBook = {
     id: books.length + 1,
-    name: req.body.name,
-    email: req.body.email,
+    title: req.body.title,
+    author: req.body.author,
   };
 
   books.push(newBook);
@@ -89,8 +89,8 @@ router.put('/update/:id', (req, res) => {
 
   const newBook = {
     id: Number(id),
-    name: req.body.name,
-    email: req.body.email,
+    title: req.body.title,
+    author: req.body.author,
   };
 
   const index = books.findIndex((c) => c.id === Number(id));
@@ -104,7 +104,7 @@ router.put('/update/:id', (req, res) => {
           ${sidebarHtml}
           <main id="content" hx-swap-oob="true">
             <p class="flash">Book was successfully updated!</p>
-            ${contactHTML}
+            ${bookHTML}
           </main>
         `;
 
@@ -133,7 +133,7 @@ router.delete('/delete/:id', (req, res) => {
       res.send(html);
     });
   } else {
-    res.redirect('/Books');
+    res.redirect('/books');
   }
 });
 
